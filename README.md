@@ -28,18 +28,33 @@ The Expenses Tracker App is a robust financial management solution developed usi
 1. **Clone the Repository:**
 `git clone https://github.com/your-username/expenses-tracker.git`
 
-2. **Configure Database:**
-Set up MySQL database and update the application.properties file with your database configuration.
+Run with Docker (recommended, no code changes required)
+From the project root, build the Docker image (make sure Docker is running):
+docker build -t expenseapp .
 
-3. **Build and Run:**
-Build the project using your preferred IDE or with Maven:
-`mvn clean install`.
+Create a Docker network so containers can resolve each other by name:
+docker network create exp-net || true
 
-4. **Run the application:**
-`java -jar target/expenses-tracker.jar`.
+Start MySQL container on that network (DB name & password must match application.properties):
+docker run -d --name mysql \
+--network exp-net \
+-e MYSQL_ROOT_PASSWORD='Test@123' \
+-e MYSQL_DATABASE='expenses_tracker' \
+-p 3306:3306 \
+mysql:8
 
-5. **Access the App:**
-Open your web browser and navigate to `http://localhost:8080`.
+(Optional) If you see authentication errors like Public Key Retrieval is not allowed, run the app with the JDBC option allowPublicKeyRetrieval=true by overriding the Spring property at runtime:
+docker run -d --name expenseapp-container \
+--network exp-net \
+-p 8080:8080 \
+-e SPRING_DATASOURCE_URL="jdbc:mysql://mysql:3306/expenses_tracker?useSSL=false&allowPublicKeyRetrieval=true" \
+-e SPRING_DATASOURCE_USERNAME=root \
+-e SPRING_DATASOURCE_PASSWORD='Test@123' \
+expenseapp
+
+Access the UI from the host or a remote machine
+http://localhost:8080/ # on the server itself
+http://ec2ip:8080/ # from another machine (open port 8080 in firewall/SG)
 
 ## ScreenShots
 ![Example Image](screenshots/1.png) <br>

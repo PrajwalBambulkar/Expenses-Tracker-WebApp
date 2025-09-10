@@ -1,0 +1,20 @@
+# expenseapp-argocd-app.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: expenseapp
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: "https://github.com/PrajwalBambulkar/Expenses-Tracker-WebApp.git"   # 👈 replace with your repo
+    targetRevision: HEAD
+    path: k8   # 👈 folder where Deployment/Service/Config/Secrets yaml exist
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+

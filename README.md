@@ -46,13 +46,15 @@ mysql:8
 
 6. **If you see authentication errors like Public Key Retrieval is not allowed, run the app with the JDBC option allowPublicKeyRetrieval=true by overriding the Spring property at runtime:**
    
-- `docker run -d --name expenseapp-container \
+```bash
+docker run -d --name expenseapp-container \
 --network exp-net \
 -p 8080:8080 \
 -e SPRING_DATASOURCE_URL="jdbc:mysql://mysql:3306/expenses_tracker?useSSL=false&allowPublicKeyRetrieval=true" \
 -e SPRING_DATASOURCE_USERNAME=root \
 -e SPRING_DATASOURCE_PASSWORD='Test@123' \
-expenseapp`
+expenseapp
+```
 
 6. **Access the UI from the host or a remote:**
 - http://localhost:8080/ # on the server itself

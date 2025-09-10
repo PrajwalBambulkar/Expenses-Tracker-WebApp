@@ -35,12 +35,13 @@ The Expenses Tracker App is a robust financial management solution developed usi
 - `docker network create exp-net || true`
 
 4. **Start MySQL container on that network (DB name & password must match application.properties):**
-- `docker run -d --name mysql \
+- ```bash
+  docker run -d --name mysql \
 --network exp-net \
 -e MYSQL_ROOT_PASSWORD='Test@123' \
 -e MYSQL_DATABASE='expenses_tracker' \
 -p 3306:3306 \
-mysql:8`
+mysql:8```
 
 5. **If you see authentication errors like Public Key Retrieval is not allowed, run the app with the JDBC option allowPublicKeyRetrieval=true by overriding the Spring property at runtime:**
    

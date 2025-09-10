@@ -84,8 +84,28 @@ kubectl port-forward svc/expenseapp-service 8080:8080 --address=0.0.0.0
 ```
 **⚙️ Step 3.** 
 - Deploy with Argo CD
+cd Expenses-Tracker-WebApp/argo
+```bash
+kubectl apply -f argocd-server-service.yaml -n argocd
+```
+**⚙️ Step 4.** 
+- Access Argo CD UI:
+```bash
+kubectl port-forward svc/argocd-server -n argocd 9090:443 --address=0.0.0.0
+```
+Then open: https://<EC2_IP>:9090
 
-  
+**⚙️ Step 5.** 
+- Login with:
+```bash
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+- Username: admin
+- Password: copy from above command
+
+  <img width="1911" height="1015" alt="image" src="https://github.com/user-attachments/assets/c9e69304-aca7-469e-98b8-4683707acb36" />
+
+
 ## ScreenShots
 ![Example Image](screenshots/1.png) <br>
 ![Example Image](screenshots/2-2.png) <br>

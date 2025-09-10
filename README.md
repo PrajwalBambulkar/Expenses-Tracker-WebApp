@@ -59,7 +59,33 @@ expenseapp
 6. **Access the UI from the host or a remote:**
 - http://localhost:8080/ # on the server itself
 - http://ec2ip:8080/ # from another machine (open port 8080 in firewall/SG)
+----------------------------------------------------------------------------------------------------------------------------------------
+# Kubernetes + Argo CD Deployment
 
+## 📦 Prerequisites
+- Kubernetes cluster (Kind/Minikube/EKS/any)
+
+- kubectl installed and configured
+
+- docker installed (to build/push images if needed)
+
+- Argo CD installed in the cluster
+
+
+**⚙️ Step 1.** 
+- cd Expenses-Tracker-WebApp/k8$
+```bash
+Kubectl apply -f .
+```
+**⚙️ Step 2.** 
+- Port-Forward
+```bash
+kubectl port-forward svc/expenseapp-service 8080:8080 --address=0.0.0.0
+```
+**⚙️ Step 3.** 
+- Deploy with Argo CD
+
+  
 ## ScreenShots
 ![Example Image](screenshots/1.png) <br>
 ![Example Image](screenshots/2-2.png) <br>

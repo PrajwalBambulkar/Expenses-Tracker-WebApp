@@ -28,8 +28,9 @@ The Expenses Tracker App is a robust financial management solution developed usi
 1. **Clone the Repository:**
 `git clone https://github.com/your-username/expenses-tracker.git`
 
-Run with Docker (recommended, no code changes required)
-From the project root, build the Docker image (make sure Docker is running):
+**Run with Docker (recommended, no code changes required)**
+
+2. From the project root, build the Docker image (make sure Docker is running):
 docker build -t expenseapp .
 
 Create a Docker network so containers can resolve each other by name:
